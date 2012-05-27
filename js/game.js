@@ -6,6 +6,6 @@ window.onload = function() {
 
   Crafty.init(WIDTH, HEIGHT);
 
-  Crafty.scene("Level01");
+  Crafty.scene("Game");
 
 };
