@@ -2,7 +2,8 @@
 //Level 01 Scene
 Crafty.scene("Game", function() {
 
-
+  Crafty.background("#EEE");
+  
 	/* round about walls */
 	// top
 	Crafty.e("2D, DOM, Color, platform, Collision")
@@ -22,16 +23,30 @@ Crafty.scene("Game", function() {
       .attr({x: 0, y: 0, w: 10, h: 768 });
 
     // player
-    Crafty.e("2D, DOM, Color, Controls, Gravity, Collision")
+    Crafty.e("2D, DOM, Color, Keyboard, Controls, Gravity, Collision")
         .color("red")
         .attr({ x: 100, y: 50, z: 1, w: 10, h: 25 })
-        .Controls(4, 12)
+        .Controls(2, 12)
         .gravity("platform")
-        .bind('Moved', function(from) {
-            if (this.hit('solid') || this.hit('velevator')) {
-                this.attr({ x: from.x, y: from.y });
-            }
+        .bind("KeyDown", function (e) {
+          if (this.isDown("LEFT_ARROW")) { this._dir = true; }
+          else if (this.isDown("RIGHT_ARROW")) { this._dir = false; }
         })
+        .bind("EnterFrame", function (frame) {
+          if(this._up) { 
+            if(!this.isDown("RIGHT_ARROW") || !this.isDown("LEFT_ARROW")) {
+              this.x = this._dir ? this._x - this._speed * 1.5 : this._x + this._speed * 1.5;
+            }
+          }
+
+          if(this.isDown("DOWN_ARROW")) { this.x = this._dir ? this._x - this._speed * 2 : this._x + this._speed * 2; }
+
+          if(this.hit('solid')) {
+            this._dir = !this._dir; // toggle direction
+            this.x = this._dir ? this._x - 5 : this._x + 5;
+          } 
+
+        });
 
     // brown = platform
     // lime = solid wall
@@ -41,12 +56,11 @@ Crafty.scene("Game", function() {
     Crafty.e("2D, DOM, Color, platform, Collision")
       .color("brown")
       .attr({x: 700, y: 680, w: 400, h: 10 });
-    Crafty.e("2D, DOM, Color, solid, Collision")
-      .color("lime")
-      .attr({x: 700, y: 690, w: 400, h: 1 });
-    Crafty.e("2D, DOM, Color, solid, Collision")
-      .color("lime")
-      .attr({x: 700, y: 680, w: 1, h: 10 });
+    
+    Crafty.e("2D, DOM, Color, roof, Collision")
+      .color("orange")
+      .attr({x: 700, y: 690, w: 400, h: 3 });
+
 
     Crafty.e("2D, DOM, Color, platform, Collision")
       .color("brown")
