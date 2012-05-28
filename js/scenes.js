@@ -56,12 +56,9 @@ Crafty.scene("Game", function() {
     Crafty.e("2D, DOM, Color, platform, Collision")
       .color("brown")
       .attr({x: 700, y: 680, w: 400, h: 10 });
-    
     Crafty.e("2D, DOM, Color, roof, Collision")
       .color("orange")
       .attr({x: 700, y: 690, w: 400, h: 3 });
-
-
     Crafty.e("2D, DOM, Color, platform, Collision")
       .color("brown")
       .attr({x: 800, y: 675, w: 100, h: 10 });
