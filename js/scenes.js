@@ -52,7 +52,9 @@ Crafty.scene("Game", function() {
     [4, 0],
     [5, 0],
     [6, 0],
-    [7, 0]
+    [7, 0],
+    [8, 0],
+    [9, 0]
   ])
   .animate("RunLeft", [
     [2, 1],
@@ -60,7 +62,9 @@ Crafty.scene("Game", function() {
     [4, 1],
     [5, 1],
     [6, 1],
-    [7, 1]
+    [7, 1],
+    [8, 1],
+    [9, 1]
   ]).animate("StandRight", [
     [0, 0]
   ]).animate("StandLeft", [
@@ -79,11 +83,11 @@ Crafty.scene("Game", function() {
 
           if(this.isDown("DOWN_ARROW") && this._dir === false ) {
             if (!this.isPlaying("RunRight")) {
-              this.stop().animate("RunRight", 15, -1);
+              this.stop().animate("RunRight", 20, -1);
             }
           } else if(this.isDown("DOWN_ARROW") && this._dir ) {
             if (!this.isPlaying("RunLeft")) {
-              this.stop().animate("RunLeft", 15, -1);
+              this.stop().animate("RunLeft", 20, -1);
             }
           } else{
             if(!this._dir) {
