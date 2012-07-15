@@ -88,10 +88,6 @@ Crafty.scene("Game", function() {
   }).bind("EnterFrame", function(frame) {
           this._dir = this._dir || false;
 
-          if(this._falling) {
-            //console.log('falling')
-          }
-
           if(this.isDown("DOWN_ARROW") && this._dir === false ) { // direction: right
 
             if(this._falling) { // jump
