@@ -193,18 +193,24 @@ Crafty.scene("Game", function() {
 
 
 
- // tasoharpake oikealla tason päällä
+  // tasoharpake oikealla tason päällä
   // taso olisi varmaan hyvä tehdä muuttujaksi komponenttivaiheessa
-  Crafty.e("2D, DOM, Color, Collision, Tween").color("orange").attr({
+  Crafty.e("2D, DOM, Color, Collision, Tween, Keyboard").color("orange").attr({
     x: 200,
     y: 600,
     w: 80,
     h: 2
   }).onHit("Player", function (ent) {
-    //
-    var move = this._lava._dir ? this._lava._x+5 : this._lava._x-5;
+
     // twiinataan niin menee siistimmin
-    ent[0].obj.tween({ x: move }, 5);
+     if(!this.isDown("DOWN_ARROW")) {
+        var player = ent[0].obj;
+        //
+        var move = this._lava._dir ? player._x+1 : player._x-1;
+        //
+        player.tween({ x: move }, 1);
+     }
+
     //
     //
   }).bind('EnterFrame', function(frame) {
