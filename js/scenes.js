@@ -56,6 +56,9 @@ Crafty.scene("Game", function() {
     [8, 0],
     [9, 0]
   ])
+  .animate("JumpRight", [
+    [1, 0]
+  ])
   .animate("RunLeft", [
     [2, 1],
     [3, 1],
@@ -65,7 +68,11 @@ Crafty.scene("Game", function() {
     [7, 1],
     [8, 1],
     [9, 1]
-  ]).animate("StandRight", [
+  ])
+  .animate("JumpLeft", [
+    [1, 1]
+  ])
+  .animate("StandRight", [
     [0, 0]
   ]).animate("StandLeft", [
     [0, 1]
@@ -81,14 +88,34 @@ Crafty.scene("Game", function() {
   }).bind("EnterFrame", function(frame) {
           this._dir = this._dir || false;
 
-          if(this.isDown("DOWN_ARROW") && this._dir === false ) {
-            if (!this.isPlaying("RunRight")) {
+          if(this._falling) {
+            //console.log('falling')
+          }
+
+          if(this.isDown("DOWN_ARROW") && this._dir === false ) { // direction: right
+
+            if(this._falling) { // jump
+              if (!this.isPlaying("JumpRight")) {
+                this.stop().animate("JumpRight", 60, 1);
+              }
+            } else { // run
+              if (!this.isPlaying("RunRight")) {
               this.stop().animate("RunRight", 20, -1);
+              }
             }
-          } else if(this.isDown("DOWN_ARROW") && this._dir ) {
-            if (!this.isPlaying("RunLeft")) {
-              this.stop().animate("RunLeft", 20, -1);
+
+          } else if(this.isDown("DOWN_ARROW") && this._dir ) { // direction: left
+
+            if(this._falling) { // jump
+              if (!this.isPlaying("JumpLeft")) {
+                this.stop().animate("JumpLeft", 60, 1);
+              }
+            } else { // run
+              if (!this.isPlaying("RunLeft")) {
+                this.stop().animate("RunLeft", 20, -1);
+              }
             }
+
           } else{
             if(!this._dir) {
               if (!this.isPlaying("StandRight")) {
