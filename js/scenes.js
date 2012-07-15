@@ -34,7 +34,7 @@ Crafty.scene("Game", function() {
   });
 
 
-  Crafty.sprite(65, "img/player1.png", {
+  Crafty.sprite(64, 64, "img/player1.png", {
     Player1: [0, 0]
   });
 
@@ -102,12 +102,13 @@ Crafty.scene("Game", function() {
           }
 
     /*
-          if(this._up) {
-            if(!this.isDown("RIGHT_ARROW") || !this.isDown("LEFT_ARROW")) {
-              this.x = this._dir ? this._x - this._speed * 1.5 : this._x + this._speed * 1.5;
-            }
-          }
-          */
+    if(this._up) {
+      if(!this.isDown("RIGHT_ARROW") || !this.isDown("LEFT_ARROW")) {
+        this.x = this._dir ? this._x - this._speed * 1.5 : this._x + this._speed * 1.5;
+      }
+    }
+    */
+
     if (this.isDown("DOWN_ARROW")) {
       this.x = this._dir ? this._x - this._speed * 2 : this._x + this._speed * 2;
     }
